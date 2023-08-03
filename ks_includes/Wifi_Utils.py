@@ -56,7 +56,7 @@ class wifi_utils:
                 network = dict()
                 network['SSID'] = ap.ssid.decode("utf-8") 
                 network['signal'] = ap.strength
-                network['security'] = ap.wpa_flags
+                network['security'] = ap.flags
                 # network['freq'] = ap.frequency #CB1 does not support 5Ghz
                 acess_points.append(network)
             
@@ -107,6 +107,10 @@ class wifi_utils:
         nmSettings.add_connection(properties)
         if(connect):
             self.connect(ssid)
+
+
+    def toggle_wifi(self, state):
+        pass
 
 
     def delete(self, network):
