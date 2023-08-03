@@ -4,24 +4,32 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
 from ks_includes.Wifi_Utils import wifi_utils
+import time
 
 class Panel(ScreenPanel):
     initialized = False
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
+        self.initialized = False
+        self.wifi = None
+        self.connected_network = None
+        self.networks_saved = []
+        self.signal_icon = []
+        self.networks_scroll = None
+        self.networks_widget = None
+        
 
+        self.init_mainframe()
+
+    def init_mainframe(self): ## TODO: benchmark grid vs box?
         main_frame = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.content.add(main_frame)
 
         self.wifi = wifi_utils()
         ip = "1.2.3.4"
 
-        self.networks = []
-        self.networks_saved = []
-
-        # --- Initialize icons for wifi siganl --- #
-        self.signal_icon = []
+        # --- Initialize icons for wifi siganl --- 
         pixbuf = self._gtk.PixbufFromIcon("wifi-signal-low", 64, 64)
         self.signal_icon.append(pixbuf)
 
@@ -40,8 +48,12 @@ class Panel(ScreenPanel):
         wifi_toggle_label = Gtk.Label(label="Wifi: ")
         wifi_toggle_label.set_margin_start(20)
 
-        swifi_toggle = Gtk.Switch()
-        swifi_toggle.connect("notify::active", self.toggle_wifi)
+        wifi_toggle = Gtk.Switch()
+        wifi_toggle.set_hexpand(False)
+        wifi_toggle.set_vexpand(False)
+        wifi_toggle.set_valign(Gtk.Align.CENTER)
+        wifi_toggle.connect("notify::active", self.toggle_wifi)
+
 
         ## TODO: Add interface: add connected wifi on top with special treatment.
 
@@ -50,23 +62,24 @@ class Panel(ScreenPanel):
         reload_networks_button.connect("clicked", self.reload_networks)
         reload_networks_button.set_hexpand(False)
 
-        control_box.add(wifi_toggle_label)
-        control_box.add(swifi_toggle)
+        control_box.pack_start(wifi_toggle_label, False, False, 0)
+        control_box.pack_start(wifi_toggle, False, False, 0)
         control_box.pack_end(reload_networks_button, False, False, 0)
 
         
         ### ---- SETUP NETWORKS SCROLL WINDOW --- ###
-        networks_scroll = self._gtk.ScrolledWindow()
+        self.networks_scroll = self._gtk.ScrolledWindow()
         self.networks_widget = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-        networks_scroll.add(self.networks_widget)
-        main_frame.add(networks_scroll)
+        self.networks_scroll.add(self.networks_widget)
+        main_frame.add(self.networks_scroll)
 
         main_frame.connect("focus-in-event", self._screen.remove_keyboard)
-        
+        main_frame.show_all()
+
         self.initialized = True
 
         GLib.idle_add(self.update_networks)
-        # GLib.timeout_add_seconds(4, self.update_networks)
+
         
     def toggle_wifi(self, switch, state):
         if switch.get_active():
@@ -78,15 +91,17 @@ class Panel(ScreenPanel):
         self.wifi.request_scan()
         network_list = self.wifi.get_networks(True)
 
-        for child in self.networks_widget.get_children():
-            self.networks_widget.remove(child)
+        ## Delete previous scan
+        net_widget = self.networks_widget
+        any(net_widget.remove(child) for child in self.networks_widget.get_children())
+
 
         for i in network_list:
             if i['SSID'] == "":
                 continue
             self.add_network(i)
 
-        self.networks_widget.show_all()
+        net_widget.show_all() 
         
         return False
     
@@ -95,9 +110,13 @@ class Panel(ScreenPanel):
         label = Gtk.Label(label=f'{ssid} PSWD:')
         password_entry = Gtk.Entry()
         password_entry.set_hexpand(True)
+        password_entry.set_vexpand(False)
+        password_entry.set_valign(Gtk.Align.CENTER)
         password_entry.grab_focus_without_selecting()
         
         button_save = self._gtk.Button("sd", _("Save"), "color3")
+        button_save.set_hexpand(False)
+        button_save.connect("clicked", self.save_network, ssid, password_entry)
 
         hbox.add(label)
         hbox.add(password_entry)
@@ -106,13 +125,20 @@ class Panel(ScreenPanel):
         self.networks_widget.add(hbox)
         self.networks_widget.reorder_child(hbox, 0)
 
+        self.networks_scroll.get_vscrollbar().get_adjustment().set_value(0)
+
         self._screen.show_keyboard(password_entry)
 
-    def save_network(self, ssid, connect = True):
-        pass
+    def save_network(self, button, ssid, psk_entery, connect = True):
+        self._screen.show_popup_message(f"Connecting to {ssid} ...")
+        # self.wifi.add_connection(ssid, psk_entery.get_text())
+        children = self.networks_widget.get_children()
+        self.networks_widget.remove(children[0])
+        self._screen.remove_keyboard()
 
     def add_network(self, network):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        hbox.set_vexpand(False)
 
         ssid_label = Gtk.Label(label=network['SSID'])
 
@@ -139,10 +165,15 @@ class Panel(ScreenPanel):
 
     def reload_networks(self, button):
         self.update_networks()
+  
     
     def remove_network(self, network):
         pass
 
+    def back(self):
+        pass
+
+        
     def activate(self):
         if self.initialized:
             pass

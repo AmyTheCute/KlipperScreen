@@ -23,7 +23,7 @@ class wifi_utils:
         self.available_networks = []
         self.saved_network_paths = []
         self.signalthresh = 20 # Will not add networks below the treshold
-        self.wlan_device_name = ""
+        self.wlan_device_name = None
 
         self.getWlanDevice()
 
@@ -38,12 +38,12 @@ class wifi_utils:
                 self.wlan_device = device
                 self.wlan_device_name = device.interface
 
-    # Requests a fresh scan from Network Manager
     def request_scan(self):
+        """Requests a fresh scan from Network Manager"""
         results = self.wlan_device.request_scan({})
         
-    #This method updates the internal list of nearby access points
     def update_aps(self, scan = False) -> None:
+        """This method updates the internal list of nearby access points"""
         if(scan):
             self.rescan_networks()
 
@@ -53,32 +53,30 @@ class wifi_utils:
         for res in results:
             ap = AccessPoint(res, self.system_bus)
             if(ap.strength >= self.signalthresh): # Dismiss if network has weak signal
-                network = dict()
-                network['SSID'] = ap.ssid.decode("utf-8") 
-                network['signal'] = ap.strength
-                network['security'] = ap.flags
+                network = self.ap_to_network(ap)
                 # network['freq'] = ap.frequency #CB1 does not support 5Ghz
                 acess_points.append(network)
             
         self.available_networks = sorted(acess_points, key=lambda d: d['signal'], reverse=True) 
 
-    #Returns a list of networks available
     def get_networks(self, update = True):
-            if(update):
-                self.update_aps()
-                
-            return self.available_networks
+        """Returns a list of Networks(Dictionary)"""
+        if(update):
+            self.update_aps()
+            
+        return self.available_networks
         
-    # Adds a path list of existing connections to saved_network_paths
     def update_saved_networks(self):
+        """Adds a path list of existing connections to the interal saved_network_paths list"""
         self.saved_network_paths = NetworkManagerSettings().list_connections()
 
     def add_connection(self, ssid, passwd, autconnect = True, connect=True):
         """ Adds a connection to networkmanager and system
-        SSID: the network SSID"""
-        if NetworkManagerSettings(self.system_bus).get_connections_by_id(ssid):
-            #TODO: Implement delete. reinstall conn on duplicate
-            return
+        SSID: the network SSID
+        passwd: Password"""
+        existing_network = NetworkManagerSettings(self.system_bus).get_connections_by_id(ssid)
+        if existing_network:
+            self.delete_connection(existing_network)
 
         #Generate properties
         properties: NetworkManagerConnectionProperties = {
@@ -108,21 +106,31 @@ class wifi_utils:
         if(connect):
             self.connect(ssid)
 
+    def ap_to_network(self, ap):
+        network = dict()
+        network['SSID'] = ap.ssid.decode("utf-8") 
+        network['signal'] = ap.strength
+        network['security'] = ap.flags
+        return network
 
     def toggle_wifi(self, state):
         pass
 
+    def get_current_connected(self):
+        curr = self.wlan_device.active_access_point
+        curr = AccessPoint(curr)
+        curr = self.ap_to_network(curr)
+        return curr
 
-    def delete(self, network):
-        "Takes network with ['UUID'], deletes it from the connections"
-        NetworkManagerSettings().delete_connection_by_uuid(network['uuid'])
+    def delete_connection_path(self, path):
+        "Takes connection path and deletes it"
+        NetworkConnectionSettings(path).delete()
 
     def connect(self, ssid):
         connection = NetworkManagerSettings(self.system_bus).get_connections_by_id(ssid)
 
         if connection == None:
-            print("Error, could not find network")
-            return
+            return "Error, could not find network"
         
         self.nm.activate_connection(connection[0])
         return

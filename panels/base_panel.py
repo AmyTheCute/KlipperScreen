@@ -195,8 +195,10 @@ class BasePanel(ScreenPanel):
     def back(self, widget=None):
         if self.current_panel is None:
             return
-
-        self._screen.remove_keyboard()
+        
+        if self._screen.keyboard is not None: # Only close keyboard and not go back if keyboard is in use.
+            self._screen.remove_keyboard()
+            return
 
         if hasattr(self.current_panel, "back") \
                 and not self.current_panel.back() \
