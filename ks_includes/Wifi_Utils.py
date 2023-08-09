@@ -33,6 +33,7 @@ class wifi_utils:
         self.run_loops = False
         self.enums = enums
         self.last_state = None
+        self.wifi_state = None
 
         self.getWlanDevice()
 
@@ -48,30 +49,36 @@ class wifi_utils:
                 self.wlan_device_name = device.interface
                 self.wlan_device_path = device_path
                 self.last_state = device.state_reason
+                self.wifi_state = self.nm.wireless_enabled
 
     def request_scan(self):
         """Requests a fresh scan from Network Manager"""
-        results = self.wlan_device.request_scan({})
+        if self.wifi_state:
+            results = self.wlan_device.request_scan({})
         
     def update_aps(self, scan = False) -> None:
-        """This method updates the internal list of nearby access points"""
-        if(scan):
-            self.request_scan()
+        if self.wifi_state:
+            """This method updates the internal list of nearby access points"""
+            if(scan):
+                self.request_scan()
 
-        acess_points = [] #reset old networks.
-        results = self.wlan_device.get_all_access_points()
-        
-        for res in results:
-            ap = AccessPoint(res, self.system_bus)
-            if(ap.strength >= self.signalthresh): # Dismiss if network has weak signal
-                network = self.ap_to_network(ap)
-                # network['freq'] = ap.frequency #CB1 does not support 5Ghz
-                acess_points.append(network)
+            acess_points = [] #reset old networks.
+            results = self.wlan_device.get_all_access_points()
             
-        self.available_networks = sorted(acess_points, key=lambda d: d['signal'], reverse=True) 
+            for res in results:
+                ap = AccessPoint(res, self.system_bus)
+                if(ap.strength >= self.signalthresh): # Dismiss if network has weak signal
+                    network = self.ap_to_network(ap)
+                    # network['freq'] = ap.frequency #CB1 does not support 5Ghz
+                    acess_points.append(network)
+                
+            self.available_networks = sorted(acess_points, key=lambda d: d['signal'], reverse=True) 
 
     def get_networks(self, update = True):
         """Returns a list of Networks(Dictionary)"""
+        if not self.wifi_state:
+            return []
+        
         if(update):
             self.update_aps()
             
@@ -147,6 +154,8 @@ class wifi_utils:
             return self.connect(ssid)
 
     def connect(self, ssid):
+        if not self.wifi_state:
+            return "Error, Wifi is not enabled"
         connection = NetworkManagerSettings(self.system_bus).get_connections_by_id(ssid)
 
         if len(connection) == 0:
@@ -164,9 +173,12 @@ class wifi_utils:
 
 
     def get_wifi_state(self):
-        return self.nm.wireless_enabled
+        self.wifi_state = self.nm.wireless_enabled
+        return self.wifi_state
+        
     
     def toggle_wifi(self, state):
+            self.wifi_state = state
             self.nm.wireless_enabled = state
 
     def get_current_connected(self):

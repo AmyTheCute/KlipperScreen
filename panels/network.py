@@ -20,6 +20,7 @@ class Panel(ScreenPanel):
         self.networks_saved_widget = None
         self.status_thread = None
         self.connecting = None
+        self.wifi_state = True
         
 
         self.init_mainframe()
@@ -51,7 +52,8 @@ class Panel(ScreenPanel):
         wifi_toggle_label.set_margin_start(20)
 
         wifi_toggle = Gtk.Switch()
-        wifi_toggle.set_active(self.wifi.get_wifi_state())
+        self.wifi_state = self.wifi.get_wifi_state()
+        wifi_toggle.set_active(self.wifi_state)
         wifi_toggle.set_hexpand(False)
         wifi_toggle.set_vexpand(False)
         wifi_toggle.set_valign(Gtk.Align.CENTER)
@@ -117,22 +119,22 @@ class Panel(ScreenPanel):
 
         if switch.get_active():
             self.wifi.toggle_wifi(True)
+            self.wifi_state = True
             GLib.timeout_add_seconds(2, self.update_networks) ## wifi takes time to wakeup...
             GLib.timeout_add_seconds(5, self.update_base_ip)
         else:
             self.wifi.toggle_wifi(False)
-
+            self.wifi_state = False
              ## discard the scan
-            net_widget = self.networks_widget
-            any(net_widget.remove(child) for child in self.networks_widget.get_children())
-            self.networks_widget.show_all()
-
+            GLib.timeout_add_seconds(1, self.update_networks)
             ## Update the IP
             GLib.timeout_add_seconds(2, self.update_base_ip)
+        
 
-    def update_networks(self):
+    def update_networks(self):      
         """ Updates the GUI with wifi networks both scanned and saved to the device """
-        self.wifi.request_scan()
+        if self.wifi_state:
+            self.wifi.request_scan()
 
         ## Delete previous scan from GUI
         net_widget = self.networks_widget
@@ -141,15 +143,28 @@ class Panel(ScreenPanel):
         saved_net_widget = self.networks_saved_widget
         any(saved_net_widget.remove(child) for child in saved_net_widget.get_children())
 
+        ### Show ethernet if Wifi Is not on.
+        if not self.wifi_state:
+            ether_label = Gtk.Label()
+            if (self.wifi.get_ip_address()):
+                ether_label.set_label("Connected using Ethernet")
+            else:
+                ether_label.set_label("Not connected to any networks")
+            
+            ether_label.set_valign(Gtk.Align.START)
+            ether_label.set_halign(Gtk.Align.CENTER)
+            self.networks_widget.add(ether_label)
+
 
         network_list = self.wifi.get_networks(True)
 
         # Temporary solution for NM first scan nonsense.
-        if(len(network_list) <= 2):
+        if(len(network_list) <= 2 and self.wifi_state):
             network_list = self.wifi.update_aps(True)
 
         if(not network_list):
             logging.info("Could not find any wifi_networks...")
+            net_widget.show_all()
             return False
             
         ## Add Saved and Known networks first

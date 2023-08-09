@@ -88,9 +88,8 @@ class BasePanel(ScreenPanel):
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
 
         self.control['ip_address'] = Gtk.Label(label = ip_adress)
-        self.control['ip_address'].set_halign(Gtk.Align.CENTER)
-        self.control['ip_address'].set_margin_end(10)
-        self.control['ip_address'].set_margin_end(20) ## Hacky but works!
+        self.control['ip_address'].set_halign(Gtk.Align.END)
+        self.control['ip_address'].set_margin_end(20)
 
         self.titlebar = Gtk.Box(spacing=5)
         self.titlebar.get_style_context().add_class("title_bar")
