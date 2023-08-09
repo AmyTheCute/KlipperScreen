@@ -111,7 +111,8 @@ class wifi_utils:
         passwd: Password"""
         existing_network = NetworkManagerSettings(self.system_bus).get_connections_by_id(ssid)
         if existing_network:
-            self.delete_connection_path(existing_network[0])
+            for net in existing_network:
+                self.delete_connection_path(net)
 
         #Generate properties
         properties: NetworkManagerConnectionProperties = {

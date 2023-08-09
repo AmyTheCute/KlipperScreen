@@ -26,6 +26,7 @@ from ks_includes.printer import Printer
 from ks_includes.widgets.keyboard import Keyboard
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
+from ks_includes.Wifi_Utils import wifi_utils
 
 logging.getLogger("urllib3").setLevel(logging.WARNING)
 
@@ -91,6 +92,7 @@ class KlipperScreen(Gtk.Window):
     max_retries = 4
     initialized = initializing = False
     popup_timeout = None
+    wifi  = None
 
     def __init__(self, args, version):
         try:
@@ -104,7 +106,9 @@ class KlipperScreen(Gtk.Window):
         self.version = version
         self.dialogs = []
         self.confirm = None
+        
 
+        self.wifi = wifi_utils() ## WARING, INITIALIZING AND ALWAYS KEEPIG THIS OPEN MIGHT CAUSE ISSUES DEPENDING ON THE IMPLEMENTATION OF THE SDBUS LIBRARY USED
         configfile = os.path.normpath(os.path.expanduser(args.configfile))
 
         self._config = KlipperScreenConfig(configfile, self)
@@ -967,6 +971,9 @@ class KlipperScreen(Gtk.Window):
             self.aspect_ratio = new_ratio
             logging.info(f"Vertical mode: {self.vertical_mode}")
 
+    def update_ip_adress(self):
+        self.base_panel.update_ip(self.wifi.get_ip_address())
+
 
 def main():
     version = functions.get_software_version()
@@ -1005,6 +1012,7 @@ def main():
     win.connect("destroy", Gtk.main_quit)
     win.show_all()
     Gtk.main()
+    
 
 
 if __name__ == "__main__":

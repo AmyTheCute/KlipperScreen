@@ -1,0 +1,800 @@
+INFO:root:wlan_device reasons: (110, 60)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 60)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (30, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (50, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (80, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70
+INFO:root:wlan_device reasons: (100, 0)
+INFO:root:networkManager reasons: 70

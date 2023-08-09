@@ -230,7 +230,6 @@ class Panel(ScreenPanel):
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         hbox.set_vexpand(False)
         
-        logging.info(f"Connecting: {self.connecting}, current: {network['SSID']}")
         if(network['priority'] == 0):
             if network['SSID'] == self.connecting:
                 label_name = f"{network['SSID']} (Connecting....)"
@@ -328,12 +327,11 @@ class Panel(ScreenPanel):
 
 
     def reload_networks(self, button):
+        self.networks_saved = self.wifi.get_saved_networks()
         self.update_networks()
         GLib.timeout_add_seconds(2, self.update_base_ip)
   
     
-    def remove_network(self, network):
-        pass
 
     def update_base_ip(self):
         self._screen.update_ip_adress()
@@ -354,13 +352,15 @@ class Panel(ScreenPanel):
         pass
 
     def connection_error_handler(self, msg):
-        logging.info(F"Device state changed {msg}")
+        logging.info(F"Device state changed {self.wifi.enums.DeviceState(msg[0])}")
         if msg[0] == self.wifi.enums.DeviceState.FAILED:
             self._screen.show_popup_message(f"Could not connect to {self.connecting}.")
             self.wifi.delete_connection_ssid(self.connecting)
             self.connecting = None
+            self.networks_saved = self.wifi.get_saved_networks()
             GLib.timeout_add_seconds(2, self.update_networks)
         elif msg[0] == self.wifi.enums.DeviceState.ACTIVATED:
             self._screen.show_popup_message(f"Connected")
+            self.networks_saved = self.wifi.get_saved_networks()
             GLib.timeout_add_seconds(1, self.update_networks)
             self.connecting = None
