@@ -226,7 +226,7 @@ class Panel(ScreenPanel):
         button_forget = self._gtk.Button("delete", None, "color3", 0.66)
         button_forget.set_hexpand(False)
         button_forget.set_vexpand(False)
-        button_forget.connect("clicked", self.forget_network, network['UUID'])
+        button_forget.connect("clicked", self.forget_network, network['SSID'])
 
         hbox.pack_start(label_ssid, False, False, 0)
         hbox.pack_end(button_forget, False, False, 0)
