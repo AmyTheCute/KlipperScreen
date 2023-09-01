@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import contextlib
 import logging
 
 import gi
@@ -9,7 +8,7 @@ from gi.repository import GLib, Gtk, Pango
 from jinja2 import Environment
 from datetime import datetime
 from math import log
-
+from contextlib import suppress
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -27,6 +26,8 @@ class BasePanel(ScreenPanel):
             'printer_select': len(self._config.get_printers()) > 1,
         }
         self.current_extruder = None
+        ip_adress = self._screen.wifi.get_ip_address()
+
         # Action bar buttons
         abscale = self.bts * 1.1
         self.control['back'] = self._gtk.Button('back', scale=abscale)
@@ -39,7 +40,7 @@ class BasePanel(ScreenPanel):
             self.control['printer_select'].connect("clicked", self._screen.show_printer_select)
 
         self.control['macros_shortcut'] = self._gtk.Button('custom-script', scale=abscale)
-        self.control['macros_shortcut'].connect("clicked", self.menu_item_clicked, "gcode_macros", {
+        self.control['macros_shortcut'].connect("clicked", self.menu_item_clicked, {
             "name": "Macros",
             "panel": "gcode_macros"
         })
@@ -81,16 +82,21 @@ class BasePanel(ScreenPanel):
         self.titlelbl.set_ellipsize(Pango.EllipsizeMode.END)
         self.set_title(title)
 
-        self.control['time'] = Gtk.Label("00:00 AM")
+        self.control['time'] = Gtk.Label(label="00:00 AM")
         self.control['time_box'] = Gtk.Box()
         self.control['time_box'].set_halign(Gtk.Align.END)
         self.control['time_box'].pack_end(self.control['time'], True, True, 10)
+
+        self.control['ip_address'] = Gtk.Label(label = ip_adress)
+        self.control['ip_address'].set_halign(Gtk.Align.END)
+        self.control['ip_address'].set_margin_end(20)
 
         self.titlebar = Gtk.Box(spacing=5)
         self.titlebar.get_style_context().add_class("title_bar")
         self.titlebar.set_valign(Gtk.Align.CENTER)
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
+        self.titlebar.add(self.control['ip_address'])
         self.titlebar.add(self.control['time_box'])
 
         # Main layout
@@ -118,7 +124,7 @@ class BasePanel(ScreenPanel):
 
             img_size = self._gtk.img_scale * self.bts
             for device in self._printer.get_temp_store_devices():
-                self.labels[device] = Gtk.Label(label="100º")
+                self.labels[device] = Gtk.Label()
                 self.labels[device].set_ellipsize(Pango.EllipsizeMode.START)
 
                 self.labels[f'{device}_box'] = Gtk.Box()
@@ -186,7 +192,7 @@ class BasePanel(ScreenPanel):
 
     def activate(self):
         if self.time_update is None:
-            self.time_update = GLib.timeout_add_seconds(1, self.update_time)
+            self.time_update = GLib.timeout_add_seconds(15, self.update_time)
 
     def add_content(self, panel):
         self.current_panel = panel
@@ -196,8 +202,10 @@ class BasePanel(ScreenPanel):
     def back(self, widget=None):
         if self.current_panel is None:
             return
-
-        self._screen.remove_keyboard()
+        
+        if self._screen.keyboard is not None: # Only close keyboard and not go back if keyboard is in use.
+            self._screen.remove_keyboard()
+            return
 
         if hasattr(self.current_panel, "back") \
                 and not self.current_panel.back() \
@@ -208,11 +216,11 @@ class BasePanel(ScreenPanel):
         if action == "notify_update_response":
             if self.update_dialog is None:
                 self.show_update_dialog()
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 self.labels['update_progress'].set_text(
                     f"{self.labels['update_progress'].get_text().strip()}\n"
                     f"{data['message']}\n")
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 if data['complete']:
                     logging.info("Update complete")
                     if self.update_dialog is not None:
@@ -242,7 +250,7 @@ class BasePanel(ScreenPanel):
                             name = f"{name[:1].upper()}: "
                     self.labels[device].set_label(f"{name}{int(temp)}°")
 
-        with contextlib.suppress(Exception):
+        with suppress(Exception):
             if data["toolhead"]["extruder"] != self.current_extruder:
                 self.control['temp_box'].remove(self.labels[f"{self.current_extruder}_box"])
                 self.current_extruder = data["toolhead"]["extruder"]
@@ -305,14 +313,13 @@ class BasePanel(ScreenPanel):
 
     def update_time(self):
         now = datetime.now()
-        confopt = self._config.get_main_config().getboolean("24htime", True)
-        if now.minute != self.time_min or self.time_format != confopt:
+        if now.minute != self.time_min:
+            confopt = self._config.get_main_config().getboolean("24htime", True)
             if confopt:
                 self.control['time'].set_text(f'{now:%H:%M }')
             else:
                 self.control['time'].set_text(f'{now:%I:%M %p}')
             self.time_min = now.minute
-            self.time_format = confopt
         return True
 
     def show_estop(self, show=True):
@@ -366,3 +373,6 @@ class BasePanel(ScreenPanel):
             self._screen.dialogs.remove(self.update_dialog)
         self.update_dialog = None
         self._screen._menu_go_back(home=True)
+
+    def update_ip(self, ip):
+        self.control['ip_address'].set_label(ip)
