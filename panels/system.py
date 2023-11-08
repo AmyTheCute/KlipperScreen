@@ -21,18 +21,35 @@ ALLOWED_SERVICES = (
 )
 
 
+class ListItem(Gtk.Box):
+    def __init__(self, title):
+        super().__init__(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        self.get_style_context().add_class("frame-item")
+        self.set_hexpand(True)
+        self.set_vexpand(False)
+        self.set_valign(Gtk.Align.CENTER)
+        self.title_label = Gtk.Label(label=title)
+        self.title_label.set_vexpand(False)
+        self.title_label.set_hexpand(False)
+        self.pack_start(self.title_label, False, False, 6)
+
+    def add_side_widget(self, button):
+        button.set_vexpand(False)
+        button.set_hexpand(False)
+        self.pack_end(button, False, False, 6)
+
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.refresh = None
         self.update_dialog = None
-        grid = self._gtk.HomogeneousGrid()
-        grid.set_row_homogeneous(False)
 
-        update_all = self._gtk.Button('arrow-up', _('Full Update'), 'color1')
-        update_all.connect("clicked", self.show_update_info, "full")
-        update_all.set_vexpand(False)
-        self.refresh = self._gtk.Button('refresh', _('Refresh'), 'color2')
+        main_frame = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        menu_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6) 
+        self.lists_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+
+        ### --- MENU BAR --- ###
+        self.refresh = self._gtk.Button('refresh', _('Refresh'), 'color2') # Not currently used
         self.refresh.connect("clicked", self.refresh_updates)
         self.refresh.set_vexpand(False)
 
@@ -43,53 +60,45 @@ class Panel(ScreenPanel):
         shutdown.connect("clicked", self.reboot_poweroff, "poweroff")
         shutdown.set_vexpand(False)
 
+        menu_bar.add(reboot)
+        menu_bar.add(shutdown)
+
+        ### -- Software Updates / ETC --- ###
+        self.update_all_button = self._gtk.Button('arrow-up', _('Update Available'), 'color1', scale=0.7)
+        self.update_all_button.connect("clicked", self.update_system)
+
+        updates_item = ListItem("Software Updates")
+        updates_item.add_side_widget(self.update_all_button)
+
+        self.lists_box.pack_start(updates_item, False, False, 0)
+
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        infogrid = Gtk.Grid()
-        infogrid.get_style_context().add_class("system-program-grid")
-        update_resp = self._screen.apiclient.send_request("machine/update/status")
+        scroll.add(self.lists_box)
 
-        if not update_resp:
-            self.update_status = {}
-            logging.info("No update manager configured")
-        else:
-            self.update_status = update_resp['result']
-            vi = update_resp['result']['version_info']
-            items = sorted(list(vi))
-            i = 0
-            for prog in items:
-                self.labels[prog] = Gtk.Label()
-                self.labels[prog].set_hexpand(True)
-                self.labels[prog].set_halign(Gtk.Align.START)
 
-                self.labels[f"{prog}_status"] = self._gtk.Button()
-                self.labels[f"{prog}_status"].set_hexpand(False)
-                self.labels[f"{prog}_status"].connect("clicked", self.show_update_info, prog)
 
-                if prog in ALLOWED_SERVICES:
-                    self.labels[f"{prog}_restart"] = self._gtk.Button("refresh", scale=.7)
-                    self.labels[f"{prog}_restart"].connect("clicked", self.restart, prog)
-                    infogrid.attach(self.labels[f"{prog}_restart"], 0, i, 1, 1)
 
-                infogrid.attach(self.labels[f"{prog}_status"], 2, i, 1, 1)
-                self.update_program_info(prog)
+        main_frame.pack_start(scroll, True, True, 6)
+        main_frame.pack_end(menu_bar, False, False, 6)
 
-                infogrid.attach(self.labels[prog], 1, i, 1, 1)
-                self.labels[prog].get_style_context().add_class('updater-item')
-                i = i + 1
+        self.get_updates()
 
-        scroll.add(infogrid)
+        if(not self.should_update()):
+            self.update_all_button.set_sensitive(False)
+            self.update_all_button.set_label("Up To Date")
 
-        grid.attach(scroll, 0, 0, 4, 2)
-        grid.attach(update_all, 0, 2, 1, 1)
-        grid.attach(self.refresh, 1, 2, 1, 1)
-        grid.attach(reboot, 2, 2, 1, 1)
-        grid.attach(shutdown, 3, 2, 1, 1)
-        self.content.add(grid)
+        self.content.add(main_frame)
 
     def activate(self):
         self.get_updates()
+        if(self.should_update()):
+            self.update_all_button.set_sensitive(True)
+            self.update_all_button.set_label("Update Available")
+        else:
+            self.update_all_button.set_sensitive(False)
+            self.update_all_button.set_label("Up To Date")
 
     def refresh_updates(self, widget=None):
         self.refresh.set_sensitive(False)
@@ -103,14 +112,14 @@ class Panel(ScreenPanel):
             logging.info("No update manager configured")
         else:
             self.update_status = update_resp['result']
-            vi = update_resp['result']['version_info']
-            items = sorted(list(vi))
-            for prog in items:
-                self.update_program_info(prog)
+
         self.refresh.set_sensitive(True)
         self._screen.close_popup_message()
 
-    def restart(self, widget, program):
+    def update_system(self, widget):
+        self.show_update_info(self, program = 'full')
+
+    def restart_service(self, widget, program):
         if program not in ALLOWED_SERVICES:
             return
 
@@ -257,11 +266,46 @@ class Panel(ScreenPanel):
             logging.info(f"Sending machine.update.client name: {program}")
             self._screen._ws.send_method("machine.update.client", {"name": program})
 
+    def should_update(self) -> bool:
+        """ Checks all packages to determine if ther system should update """
+        version_information = self.update_status['version_info']
+        programs = sorted(list(version_information))
+
+        for program in programs:
+            if program == "system":
+                continue
+            else:
+                if(self.is_update_available(program)):
+                    return True
+        
+        return False # No non-system updates were available. Only update system if a package update also exists.
+
+    def is_update_available(self, p):
+        """ Checks specific package for an update """
+
+        info = self.update_status['version_info'][p]
+        if p == "system":
+            if info['package_count'] == 0:
+                return False
+            else:
+                return True
+        elif info['version'] == info['remote_version']:
+            return False
+        else:
+            return True
+
     def update_program_info(self, p):
 
         if 'version_info' not in self.update_status or p not in self.update_status['version_info']:
             logging.info(f"Unknown version: {p}")
             return
+
+        if(not self.is_update_available(p)):
+            self.labels[f"{p}_status"].set_label(f" {p} no update {self.should_update()} ")
+        else:
+            self.labels[f"{p}_status"].set_label(f"{p} some update")
+
+        return
 
         info = self.update_status['version_info'][p]
 
