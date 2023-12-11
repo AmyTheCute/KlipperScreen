@@ -1,5 +1,5 @@
 import logging
-import os
+import os, subprocess
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -23,7 +23,7 @@ ALLOWED_SERVICES = (
 
 class ListItem(Gtk.Box):
     def __init__(self, title):
-        super().__init__(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        super().__init__(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         self.get_style_context().add_class("frame-item")
         self.set_hexpand(True)
         self.set_vexpand(False)
@@ -38,7 +38,7 @@ class ListItem(Gtk.Box):
         button.set_hexpand(False)
         self.pack_end(button, False, False, 6)
 
-class Panel(ScreenPanel):
+class Panel(ScreenPanel): # todo, add error handling, soft and hard recovery options. add version, add machine serial, add zerotier ID,
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.refresh = None
@@ -49,7 +49,7 @@ class Panel(ScreenPanel):
         self.lists_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
 
         ### --- MENU BAR --- ###
-        self.refresh = self._gtk.Button('refresh', _('Refresh'), 'color2') # Not currently used
+        self.refresh = self._gtk.Button('refresh', _('Check for Updates'), 'color2')
         self.refresh.connect("clicked", self.refresh_updates)
         self.refresh.set_vexpand(False)
 
@@ -60,17 +60,23 @@ class Panel(ScreenPanel):
         shutdown.connect("clicked", self.reboot_poweroff, "poweroff")
         shutdown.set_vexpand(False)
 
+        menu_bar.add(self.refresh)
         menu_bar.add(reboot)
         menu_bar.add(shutdown)
 
         ### -- Software Updates / ETC --- ###
         self.update_all_button = self._gtk.Button('arrow-up', _('Update Available'), 'color1', scale=0.7)
-        self.update_all_button.connect("clicked", self.update_system)
+        self.update_all_button.connect("clicked", self.show_update_info) # Might have issues with modified repos, switch to ZIP updates instead?
 
         updates_item = ListItem("Software Updates")
         updates_item.add_side_widget(self.update_all_button)
 
+        node_id = ListItem("Support Node ID")
+        node_id_label = Gtk.Label(label=self.get_zerotier_node())
+        node_id.add_side_widget(node_id_label)
+
         self.lists_box.pack_start(updates_item, False, False, 0)
+        self.lists_box.pack_start(node_id, False, False, 0)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -116,9 +122,6 @@ class Panel(ScreenPanel):
         self.refresh.set_sensitive(True)
         self._screen.close_popup_message()
 
-    def update_system(self, widget):
-        self.show_update_info(self, program = 'full')
-
     def restart_service(self, widget, program):
         if program not in ALLOWED_SERVICES:
             return
@@ -126,8 +129,14 @@ class Panel(ScreenPanel):
         logging.info(f"Restarting service: {program}")
         self._screen._ws.send_method("machine.services.restart", {"service": program})
 
-    def show_update_info(self, widget, program):
-        info = self.update_status['version_info'][program] if program in self.update_status['version_info'] else {}
+    def show_update_info(self, widget):
+        is_dirty = False
+
+        for program in self.update_status['version_info']:
+            is_dirty = self.program_is_dirty(program)
+
+            if is_dirty:
+                break
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -138,77 +147,13 @@ class Panel(ScreenPanel):
 
         label = Gtk.Label()
         label.set_line_wrap(True)
-        if program == "full":
-            label.set_markup('<b>' + _("Perform a full upgrade?") + '</b>')
-            vbox.add(label)
-        elif 'configured_type' in info and info['configured_type'] == 'git_repo':
-            if not info['is_valid'] or info['is_dirty']:
-                label.set_markup(_("Do you want to recover %s?") % program)
-                vbox.add(label)
-                scroll.add(vbox)
-                recoverybuttons = [
-                    {"name": _("Recover Hard"), "response": Gtk.ResponseType.OK},
-                    {"name": _("Recover Soft"), "response": Gtk.ResponseType.APPLY},
-                    {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
-                ]
-                dialog = self._gtk.Dialog(self._screen, recoverybuttons, scroll, self.reset_confirm, program)
-                dialog.set_title(_("Recover"))
-                return
-            else:
-                if info['version'] == info['remote_version']:
-                    return
-                ncommits = len(info['commits_behind'])
-                label.set_markup("<b>" +
-                                 _("Outdated by %d") % ncommits +
-                                 " " + ngettext("commit", "commits", ncommits) +
-                                 ":</b>\n")
-                vbox.add(label)
 
-                for c in info['commits_behind']:
-                    commit_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-                    title = Gtk.Label()
-                    title.set_line_wrap(True)
-                    title.set_line_wrap_mode(Pango.WrapMode.CHAR)
-                    title.set_markup(f"\n<b>{c['subject']}</b>\n<i>{c['author']}</i>\n")
-                    title.set_halign(Gtk.Align.START)
-                    commit_box.add(title)
+        if(is_dirty):
+            label.set_markup('<b>' + _("Incompatible changes detected, reeset? </b>\n (User changes detected and will be reset, you may update again afterwards)"))
+        else: 
+            label.set_markup('<b>' + _("Perform a full update?") + '</b>')
 
-                    details = Gtk.Label(label=f"{c['message']}")
-                    details.set_line_wrap(True)
-                    details.set_halign(Gtk.Align.START)
-                    commit_box.add(details)
-                    commit_box.add(Gtk.Separator())
-                    vbox.add(commit_box)
-
-        elif "package_count" in info:
-            label.set_markup((
-                f'<b>{info["package_count"]} '
-                + ngettext("Package will be updated", "Packages will be updated", info["package_count"])
-                + ':</b>\n'
-            ))
-            label.set_halign(Gtk.Align.CENTER)
-            vbox.add(label)
-            grid = Gtk.Grid()
-            grid.set_column_homogeneous(True)
-            grid.set_halign(Gtk.Align.CENTER)
-            grid.set_valign(Gtk.Align.CENTER)
-            i = 0
-            for j, c in enumerate(info["package_list"]):
-                label = Gtk.Label()
-                label.set_markup(f"  {c}  ")
-                label.set_halign(Gtk.Align.START)
-                label.set_ellipsize(Pango.EllipsizeMode.END)
-                pos = (j % 3)
-                grid.attach(label, pos, i, 1, 1)
-                if pos == 2:
-                    i += 1
-            vbox.add(grid)
-        else:
-            label.set_markup(
-                "<b>" + _("%s will be updated to version") % program.capitalize()
-                + f": {info['remote_version']}</b>"
-            )
-            vbox.add(label)
+        vbox.add(label)
 
         scroll.add(vbox)
 
@@ -222,8 +167,31 @@ class Panel(ScreenPanel):
     def update_confirm(self, dialog, response_id, program):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.OK:
-            logging.debug(f"Updating {program}")
-            self.update_program(self, program)
+            logging.debug(f"Updating system")
+            self.update_system(self)
+
+    def program_is_dirty(self, program):
+        """ Checks if the repository for a program is dirty """
+        program = self.update_status['version_info'][program]
+        if 'configured_type' in program:
+                if program['configured_type'] == 'git_repo':
+                    if not program['is_valid'] or program['is_dirty']:
+                        return True
+        return False
+    
+    def update_system(self, widget):
+        """ Performs a full system update, resetting any dirty repos """
+
+        if self._screen.updating or not self.update_status:
+            return
+        
+        for program in self.update_status['version_info']:
+            if (self.program_is_dirty(program)):
+                logging.debug(f"Repo {program} is dirty, hard resetting repo...")
+                self.reset_repo(self, program, True)
+
+        logging.debug("Sending full update request to moonraker")
+        self._screen._ws.send_method("machine.update.full")
 
     def reset_confirm(self, dialog, response_id, program):
         self._gtk.remove_dialog(dialog)
@@ -261,7 +229,7 @@ class Panel(ScreenPanel):
 
         if program in ['klipper', 'moonraker', 'system', 'full']:
             logging.info(f"Sending machine.update.{program}")
-            self._screen._ws.send_method(f"machine.update.{program}")
+            self._screen.dd.send_method(f"machine.update.{program}")
         else:
             logging.info(f"Sending machine.update.client name: {program}")
             self._screen._ws.send_method("machine.update.client", {"name": program})
@@ -386,3 +354,12 @@ class Panel(ScreenPanel):
                 self._screen._ws.send_method("machine.reboot")
             else:
                 self._screen._ws.send_method("machine.shutdown")
+
+    def get_zerotier_node(self):
+        node_id = subprocess.check_output(['sudo', 'zerotier-cli', 'status']).decode()
+        node_id = node_id.split(" ")[2]
+
+        if len(node_id) < 10:
+            return "N/A"
+        else:
+            return node_id
