@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
-"PO-Revision-Date: 2022-11-30 18:10-0300\n"
-"Last-Translator: livinhack\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
+"PO-Revision-Date: 2023-11-16 02:51+0000\n"
+"Last-Translator: bbraeu <braeu.bernhard@gmail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -46,16 +47,22 @@ msgstr "OK"
 msgid "Add profile"
 msgstr "Profil hinzufügen"
 
+msgid "All"
+msgstr "Alle"
+
 msgid "Apply"
 msgstr "Anwenden"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "%s%.3f Offset auf Endstop anwenden"
+msgstr "%s%.3f Offset auf Endschalter anwenden?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "%s%.3f Offset auf Probe anwenden"
+msgstr "%s%.3f Offset auf Sonde anwenden?"
+
+msgid "Archived"
+msgstr "Archiviert"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Möchtest du das Objekt wirklich ausschließen?"
@@ -83,6 +90,9 @@ msgstr "Automatisch kalibrieren"
 
 msgid "Auto-close notifications"
 msgstr "Benachrichtigungen automatisch schließen"
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Extrudieren bei Pause automatisch öffnen"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -157,14 +167,11 @@ msgstr "Verbinden zu %s"
 msgid "Console"
 msgstr "Konsole"
 
-msgid "Continue"
-msgstr "Fortsetzen"
-
 msgid "Cooldown"
 msgstr "Abkühlen"
 
 msgid "DPMS has failed to load and has been disabled"
-msgstr ""
+msgstr "DPMS konnte nicht geladen werden und wurde deaktiviert"
 
 msgid "Date"
 msgstr "Datum"
@@ -204,13 +211,13 @@ msgid "Extra Large"
 msgstr "Extra groß"
 
 msgid "Extrude"
-msgstr "Fördern"
+msgstr "Extrudieren"
 
 msgid "Extrusion +"
-msgstr "Fördern +"
+msgstr "Extrudieren +"
 
 msgid "Extrusion -"
-msgstr "Fördern -"
+msgstr "Extrudieren -"
 
 msgid "Failed, adjust position first"
 msgstr "Fehlgeschlagen, Position zuerst anpassen"
@@ -236,6 +243,9 @@ msgstr "Datei"
 msgid "File:"
 msgstr "Datei:"
 
+msgid "Filter"
+msgstr "Filter"
+
 msgid "Finding ADXL"
 msgstr "ADXL finden"
 
@@ -260,9 +270,6 @@ msgstr "Schriftgröße"
 msgid "Full Update"
 msgstr "Vollständige Aktualisierung"
 
-msgid "Fullscreen"
-msgstr "Vollbild"
-
 msgid "Go Back"
 msgstr "Zurück"
 
@@ -285,25 +292,28 @@ msgid "Home"
 msgstr "Grundposition"
 
 msgid "Home All"
-msgstr "Alle Achsen zurücksetzen"
+msgstr "Alle Achsen referenzieren"
 
 msgid "Home X"
-msgstr "Achse X neupositionieren"
+msgstr "X referenzieren"
 
 msgid "Home XY"
-msgstr "Achse XY neupositionieren"
+msgstr "XY referenzieren"
 
 msgid "Home Y"
-msgstr "Achse Y neupositionieren"
+msgstr "Y referenzieren"
 
 msgid "Home Z"
-msgstr "Achse Z neupositionieren"
+msgstr "Z referenzieren"
 
 msgid "Host"
 msgstr "Host"
 
 msgid "Hostname"
 msgstr "Hostname"
+
+msgid "ID"
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Icon Theme"
@@ -312,7 +322,7 @@ msgid "Initializing printer..."
 msgstr "Drucker wird initialisiert..."
 
 msgid "Initiate a PID calibration for:"
-msgstr ""
+msgstr "Initiieren einer PID-Kalibrierung für:"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -336,7 +346,7 @@ msgid "Invert Z"
 msgstr "Achse Z invertieren"
 
 msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
+msgstr "Je nach Leistung der Heizung kann dies mehr als 5 Minuten dauern."
 
 msgid "Klipper Restart"
 msgstr "Klipper Neustart"
@@ -351,13 +361,16 @@ msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper veruscht zu starten"
+msgstr "Klipper versucht zu starten"
 
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen startet neu"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
+"Filament_Laden/Filament_Entladen sind versteckt und sollten von extrudieren "
+"aus verwendet werden"
 
 msgid "Language"
 msgstr "Sprache"
@@ -365,8 +378,14 @@ msgstr "Sprache"
 msgid "Large"
 msgstr "Groß"
 
+msgid "Last Used"
+msgstr "Zuletzt verwendet"
+
 msgid "Layer:"
 msgstr "Schicht:"
+
+msgid "Leds"
+msgstr "Leds"
 
 msgid "Left:"
 msgstr "Restzeit:"
@@ -388,6 +407,9 @@ msgstr "Makros"
 
 msgid "Main Menu"
 msgstr "Hauptmenü"
+
+msgid "Material"
+msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -429,7 +451,7 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: Verbunden"
 
 msgid "More"
-msgstr ""
+msgstr "Mehr"
 
 msgid "Move"
 msgstr "Bewegen"
@@ -448,6 +470,9 @@ msgstr "Niemals"
 
 msgid "New"
 msgstr "Neu"
+
+msgid "No elegible macros:"
+msgstr "Keine wählbaren Makros:"
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -529,7 +554,7 @@ msgid "Profile Name:"
 msgstr "Profilname:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Stelle die KlipperScreen.log zur Verfügung wenn du hilfe benötigst\n"
+msgstr "Wenn Hilfe benötigt wird KlipperScreen.log angeben.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -553,7 +578,7 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 msgid "Rename/Move:"
-msgstr "Umbenennen/Bewegen"
+msgstr "Umbenennen/Bewegen:"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -625,6 +650,9 @@ msgstr "Zeigen"
 msgid "Show Heater Power"
 msgstr "Heizleistung anzeigen"
 
+msgid "Show Scrollbars Buttons"
+msgstr "Zeige Scrollbar Schaltfläche"
+
 msgid "Shutdown"
 msgstr "Ausschalten"
 
@@ -656,7 +684,7 @@ msgid "Square Corner Velocity"
 msgstr "Eckgeschwindigkeit"
 
 msgid "Standby"
-msgstr ""
+msgstr "Standby"
 
 msgid "Start"
 msgstr "Starten"
@@ -751,6 +779,12 @@ msgid_plural "hours"
 msgstr[0] "Stunde"
 msgstr[1] "Stunden"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "Makros, die 'rename_existing' verwenden, sind ausgeblendet"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "Makros mit einem Namen, der mit '_' beginnt, sind ausgeblendet"
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "Minute"
@@ -767,6 +801,15 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen startet neu"
+
+#~ msgid "Continue"
+#~ msgstr "Fortsetzen"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Vollbild"
 
 #~ msgid "Actions"
 #~ msgstr "Aktionen"

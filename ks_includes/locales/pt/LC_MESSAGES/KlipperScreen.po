@@ -1,7 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Brazilian Portuguese translation improved by
 # Rafael Neuwirth Swierczynski (born and raised in Brazil),
@@ -11,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 02:01-0300\n"
+"POT-Creation-Date: 2023-10-20 00:09-0300\n"
 "PO-Revision-Date: 2022-11-30 18:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,16 +46,22 @@ msgstr "Aceitar"
 msgid "Add profile"
 msgstr "Adicionar perfil"
 
+msgid "All"
+msgstr "Todos"
+
 msgid "Apply"
 msgstr "Aplicar"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "Aplicar %s%.3f offset no Endstop?"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "Aplicar %s%.3f offset no Probe?"
+
+msgid "Archived"
+msgstr "Arquivado"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Tem certeza de que deseja excluir o objeto?"
@@ -86,16 +88,19 @@ msgid "Auto-calibrate"
 msgstr "Calibrar automaticamente"
 
 msgid "Auto-close notifications"
-msgstr "Notificações de fechamento automático"
+msgstr "Fechar notificações autom."
+
+msgid "Auto-open Extrude On Pause"
+msgstr "Abrir Ext. automaticamente em Pausa"
 
 msgid "Auto-scroll"
-msgstr "Auto-scroll"
+msgstr "Acompanhar Conteúdo"
 
 msgid "Bed Level"
 msgstr "Nível da Mesa"
 
 msgid "Bed Mesh"
-msgstr "Nivelamento da Mesa"
+msgstr "Nivelamento"
 
 msgid "Bed screw configuration:"
 msgstr "Configuração da Porca de Mesa:"
@@ -110,7 +115,7 @@ msgid "Calibrating"
 msgstr "Calibrando"
 
 msgid "Camera"
-msgstr ""
+msgstr "Câmera"
 
 msgid "Can't set above the maximum:"
 msgstr "Não é possível definir o Máximo:"
@@ -149,7 +154,7 @@ msgid "Complete"
 msgstr "Completado"
 
 msgid "Confirm Emergency Stop"
-msgstr "Etapa extra ao Parar com Emergência"
+msgstr "Confirmação ao Parar com Emergência"
 
 msgid "Connected"
 msgstr "Conectado"
@@ -160,9 +165,6 @@ msgstr "Conectando %s"
 
 msgid "Console"
 msgstr "Terminal"
-
-msgid "Continue"
-msgstr "Continuar"
 
 msgid "Cooldown"
 msgstr "Resfriar"
@@ -240,6 +242,9 @@ msgstr "Arquivo"
 msgid "File:"
 msgstr "Arquivo:"
 
+msgid "Filter"
+msgstr "Filtro"
+
 msgid "Finding ADXL"
 msgstr "Encontrar ADXL"
 
@@ -264,9 +269,6 @@ msgstr "Tamanho da fonte"
 msgid "Full Update"
 msgstr "Atualizar Tudo"
 
-msgid "Fullscreen"
-msgstr ""
-
 msgid "Go Back"
 msgstr "Voltar"
 
@@ -283,10 +285,10 @@ msgid "Hide sensors in Temp."
 msgstr "Ocultar sensores na Temperatura."
 
 msgid "Hide temp."
-msgstr "Ocultar temperatura"
+msgstr "Ocultar Temp."
 
 msgid "Home"
-msgstr ""
+msgstr "Zerar"
 
 msgid "Home All"
 msgstr "Zerar XYZ"
@@ -309,8 +311,14 @@ msgstr "Host"
 msgid "Hostname"
 msgstr "Nome do Host"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "Icon Theme"
 msgstr "Tema"
+
+msgid "Notifications"
+msgstr "Notificações"
 
 msgid "Initializing printer..."
 msgstr "Inicializando Impressora..."
@@ -319,7 +327,7 @@ msgid "Initiate a PID calibration for:"
 msgstr ""
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "Moldagem Assistiva"
 
 msgid "Interface"
 msgstr "Interface"
@@ -360,8 +368,9 @@ msgstr "Klipper está iniciando"
 msgid "Klipper will reboot"
 msgstr "Klipper será reiniciado"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreen será reiniciado"
+msgid ""
+"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
+msgstr ""
 
 msgid "Language"
 msgstr "Idioma"
@@ -369,8 +378,14 @@ msgstr "Idioma"
 msgid "Large"
 msgstr "Grande"
 
+msgid "Last Used"
+msgstr "Último Usado"
+
 msgid "Layer:"
 msgstr "Camada:"
+
+msgid "Leds"
+msgstr "Luzes"
 
 msgid "Left:"
 msgstr "Restante:"
@@ -382,16 +397,19 @@ msgid "Load"
 msgstr "Carregar"
 
 msgid "Lower Nozzle"
-msgstr "Descer o Bico"
+msgstr "Descer Extrusor"
 
 msgid "Macro shortcut on sidebar"
-msgstr "Macro na barra lateral"
+msgstr "Atalho dedicado para Macros"
 
 msgid "Macros"
 msgstr "Macros"
 
 msgid "Main Menu"
-msgstr "Menu principal"
+msgstr "Menu Principal"
+
+msgid "Material"
+msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -433,13 +451,13 @@ msgid "Moonraker: connected"
 msgstr "Moonraker: Conectado"
 
 msgid "More"
-msgstr ""
+msgstr "Extras"
 
 msgid "Move"
 msgstr "Mover"
 
 msgid "Move Distance (mm)"
-msgstr "Distancia do movimento (mm)"
+msgstr "Distancia de movimento (mm)"
 
 msgid "Name"
 msgstr "Nome"
@@ -452,6 +470,9 @@ msgstr "Nunca"
 
 msgid "New"
 msgstr "Novo"
+
+msgid "No elegible macros:"
+msgstr ""
 
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
@@ -491,7 +512,7 @@ msgid "Perform a full upgrade?"
 msgstr "Realizar uma Atualização Completa?"
 
 msgid "Pins"
-msgstr "Pinos"
+msgstr "Conectores"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Por favor, recompile e atualize o microcontrolador."
@@ -533,13 +554,13 @@ msgid "Profile Name:"
 msgstr "Nome do Perfil:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Forneça um Log do KlipperScreen ao pedir ajuda.\n"
+msgstr ""
 
 msgid "Quad Gantry Level"
 msgstr "Nível do pórtico quádruplo"
 
 msgid "Raise Nozzle"
-msgstr "Elevar o Bico"
+msgstr "Elevar Extrusor"
 
 msgid "Recover"
 msgstr "Recuperar"
@@ -557,7 +578,7 @@ msgid "Refresh"
 msgstr "Recarregar"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "Renomear/Mover:"
 
 msgid "Restart"
 msgstr "Reiniciar"
@@ -587,7 +608,7 @@ msgid "Save"
 msgstr "Salvar"
 
 msgid "Save Config"
-msgstr "Salvar Configuração"
+msgstr "Salvar Config."
 
 msgid "Save Z"
 msgstr "Salvar Eixo Z"
@@ -596,17 +617,17 @@ msgid "Save configuration?"
 msgstr "Salvar configuração?"
 
 msgid "Saved"
-msgstr "Salvou"
+msgstr "Salvo"
 
 #, python-format
 msgid "Saved offset: %s"
 msgstr "Deslocamento salvo: %s"
 
 msgid "Screen DPMS"
-msgstr "Tela DPMS"
+msgstr "DPMS na Tela"
 
 msgid "Screen Power Off Time"
-msgstr "Tempo de desligamento da tela"
+msgstr "Descanso de Tela"
 
 msgid "Screws Adjust"
 msgstr "Nivelamento Manual"
@@ -627,7 +648,10 @@ msgid "Show"
 msgstr "Mostrar"
 
 msgid "Show Heater Power"
-msgstr "Mostrar Potência do Aquecedor"
+msgstr "Exibir Potência do Aquecedor"
+
+msgid "Show Scrollbars Buttons"
+msgstr "Botões auxiliares de Rolagem"
 
 msgid "Shutdown"
 msgstr "Desligar"
@@ -660,7 +684,7 @@ msgid "Square Corner Velocity"
 msgstr "Velocidade do Canto Reto"
 
 msgid "Standby"
-msgstr ""
+msgstr "Repouso"
 
 msgid "Start"
 msgstr "Iniciar"
@@ -678,10 +702,10 @@ msgid "System"
 msgstr "Sistema"
 
 msgid "System Restart"
-msgstr "Reinicialização do sistema"
+msgstr "Reiniciar Sistema"
 
 msgid "System Shutdown"
-msgstr "Desligamento do sistema"
+msgstr "Desligar Sistema"
 
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
@@ -753,6 +777,12 @@ msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
+msgid "macros that use 'rename_existing' are hidden"
+msgstr "macros que usam 'rename_existing' são ocultos"
+
+msgid "macros with a name starting with '_' are hidden"
+msgstr "macros que iniciam com '_' são ocultos"
+
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -769,6 +799,12 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+#~ msgid "KlipperScreen will reboot"
+#~ msgstr "KlipperScreen será reiniciado"
+
+#~ msgid "Continue"
+#~ msgstr "Continuar"
 
 #~ msgid "Actions"
 #~ msgstr "Ações"

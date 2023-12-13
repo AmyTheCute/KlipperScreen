@@ -6,10 +6,11 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Pango
 from contextlib import suppress
-from math import pi, sqrt
+from math import pi, sqrt, trunc
 from statistics import median
 from time import time
 from ks_includes.screen_panel import ScreenPanel
+from ks_includes.KlippyGtk import find_widget
 
 
 class Panel(ScreenPanel):
@@ -25,7 +26,7 @@ class Panel(ScreenPanel):
         self.f_layer_h = self.layer_h = 1
         self.oheight = 0.0
         self.current_extruder = None
-        self.fila_section = 0.0
+        self.fila_section = pi * ((1.75 / 2) ** 2)
         self.filename_label = self.filename = self.prev_pos = self.prev_gpos = None
         self.can_close = False
         self.flow_timeout = self.animation_timeout = None
@@ -115,11 +116,13 @@ class Panel(ScreenPanel):
         overlay.add_overlay(box)
         self.grid.attach(overlay, 0, 0, 1, 1)
 
-        self.labels['thumbnail'] = self._gtk.Image()
+        self.labels['thumbnail'] = self._gtk.Button("file")
+        self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
+        self.labels['thumbnail'].set_hexpand(False)
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
-        if self._printer.get_tools():
-            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        if self.current_extruder:
             diameter = float(self._printer.get_config_section(self.current_extruder)['filament_diameter'])
             self.fila_section = pi * ((diameter / 2) ** 2)
 
@@ -155,8 +158,8 @@ class Panel(ScreenPanel):
         nlimit = 2 if self._screen.width <= 500 else 3
         n = 0
         self.buttons['extruder'] = {}
-        if self._printer.get_tools():
-            self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        self.current_extruder = self._printer.get_stat("toolhead", "extruder")
+        if self.current_extruder:
             for i, extruder in enumerate(self._printer.get_tools()):
                 self.labels[extruder] = Gtk.Label(label="-")
                 self.buttons['extruder'][extruder] = self._gtk.Button(f"extruder-{i}", "", None, self.bts,
@@ -168,23 +171,22 @@ class Panel(ScreenPanel):
                 self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
             self.labels['temp_grid'].attach(self.buttons['extruder'][self.current_extruder], n, 0, 1, 1)
             n += 1
-        else:
-            self.current_extruder = None
         self.buttons['heater'] = {}
-        if self._printer.has_heated_bed():
-            self.buttons['heater']['heater_bed'] = self._gtk.Button("bed", "", None, self.bts, Gtk.PositionType.LEFT, 1)
-            self.labels['heater_bed'] = Gtk.Label(label="-")
-            self.buttons['heater']['heater_bed'].set_label(self.labels['heater_bed'].get_text())
-            self.buttons['heater']['heater_bed'].connect("clicked", self.menu_item_clicked,
-                                                         {"panel": "temperature", "name": _("Temperature"),
-                                                          'extra': 'heater_bed'})
-            self.buttons['heater']['heater_bed'].set_halign(Gtk.Align.START)
-            self.labels['temp_grid'].attach(self.buttons['heater']['heater_bed'], n, 0, 1, 1)
-            n += 1
         for dev in self._printer.get_heaters():
             if n >= nlimit:
                 break
-            if dev.startswith("heater_generic"):
+            if dev == "heater_bed":
+                self.buttons['heater']['heater_bed'] = self._gtk.Button("bed", "", None, self.bts,
+                                                                        Gtk.PositionType.LEFT, 1)
+                self.labels['heater_bed'] = Gtk.Label(label="-")
+                self.buttons['heater']['heater_bed'].set_label(self.labels['heater_bed'].get_text())
+                self.buttons['heater']['heater_bed'].connect("clicked", self.menu_item_clicked,
+                                                             {"panel": "temperature", "name": _("Temperature"),
+                                                              'extra': 'heater_bed'})
+                self.buttons['heater']['heater_bed'].set_halign(Gtk.Align.START)
+                self.labels['temp_grid'].attach(self.buttons['heater']['heater_bed'], n, 0, 1, 1)
+                n += 1
+            elif dev.startswith("heater_generic"):
                 self.buttons['heater'][dev] = self._gtk.Button("heater", "", None, self.bts, Gtk.PositionType.LEFT, 1)
                 self.labels[dev] = Gtk.Label(label="-")
                 self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
@@ -349,7 +351,6 @@ class Panel(ScreenPanel):
     def activate(self):
         if self.flow_timeout is None:
             self.flow_timeout = GLib.timeout_add_seconds(2, self.update_flow)
-        self._screen.base_panel_show_all()
 
     def deactivate(self):
         if self.flow_timeout is not None:
@@ -404,8 +405,7 @@ class Panel(ScreenPanel):
             {"name": _("Apply"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
-        dialog = self._gtk.Dialog(self._screen, buttons, grid, self.save_confirm, device)
-        dialog.set_title(_("Save Z"))
+        self._gtk.Dialog(_("Save Z"), buttons, grid, self.save_confirm, device)
 
     def save_confirm(self, dialog, response_id, device):
         self._gtk.remove_dialog(dialog)
@@ -420,8 +420,7 @@ class Panel(ScreenPanel):
         if self.filename:
             self.disable_button("restart")
             if self.state == "error":
-                script = {"script": "SDCARD_RESET_FILE"}
-                self._screen._send_action(None, "printer.gcode.script", script)
+                self._screen._ws.klippy.gcode_script("SDCARD_RESET_FILE")
             self._screen._ws.klippy.print_start(self.filename)
             logging.info(f"Starting print: {self.filename}")
             self.new_print()
@@ -452,9 +451,7 @@ class Panel(ScreenPanel):
         label.set_valign(Gtk.Align.CENTER)
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-
-        dialog = self._gtk.Dialog(self._screen, buttons, label, self.cancel_confirm)
-        dialog.set_title(_("Cancel"))
+        self._gtk.Dialog(_("Cancel"), buttons, label, self.cancel_confirm)
 
     def cancel_confirm(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)
@@ -503,24 +500,18 @@ class Panel(ScreenPanel):
         elif action != "notify_status_update":
             return
 
-        for x in self._printer.get_tools():
-            if x in self.buttons['extruder']:
+        for x in self._printer.get_temp_devices():
+            if x in data:
                 self.update_temp(
                     x,
                     self._printer.get_dev_stat(x, "temperature"),
                     self._printer.get_dev_stat(x, "target"),
                     self._printer.get_dev_stat(x, "power"),
                 )
-                self.buttons['extruder'][x].set_label(self.labels[x].get_text())
-        for x in self._printer.get_heaters():
-            if x in self.buttons['heater']:
-                self.update_temp(
-                    x,
-                    self._printer.get_dev_stat(x, "temperature"),
-                    self._printer.get_dev_stat(x, "target"),
-                    self._printer.get_dev_stat(x, "power"),
-                )
-                self.buttons['heater'][x].set_label(self.labels[x].get_text())
+                if x in self.buttons['extruder']:
+                    self.buttons['extruder'][x].set_label(self.labels[x].get_text())
+                elif x in self.buttons['heater']:
+                    self.buttons['heater'][x].set_label(self.labels[x].get_text())
 
         if "display_status" in data and "message" in data["display_status"]:
             self.labels['lcdmessage'].set_label(
@@ -597,11 +588,10 @@ class Panel(ScreenPanel):
             with suppress(KeyError):
                 self.update_filename(data['print_stats']["filename"])
             with suppress(KeyError):
-                if 'print_duration' in data["print_stats"]:
-                    if 'filament_used' in data["print_stats"]:
-                        self.labels['filament_used'].set_label(
-                            f"{float(data['print_stats']['filament_used']) / 1000:.1f} m"
-                        )
+                if 'filament_used' in data["print_stats"]:
+                    self.labels['filament_used'].set_label(
+                        f"{float(data['print_stats']['filament_used']) / 1000:.1f} m"
+                    )
             if 'info' in data["print_stats"]:
                 with suppress(KeyError):
                     if data["print_stats"]['info']['total_layer'] is not None:
@@ -617,7 +607,7 @@ class Panel(ScreenPanel):
                     f"{1 + round((self.pos_z - self.f_layer_h) / self.layer_h)} / "
                     f"{self.labels['total_layers'].get_text()}"
                 )
-            if self.state in ["printing"]:
+            if self.state in ["printing", "paused"]:
                 self.update_time_left()
 
     def update_flow(self):
@@ -632,15 +622,14 @@ class Panel(ScreenPanel):
     def update_time_left(self):
         total_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
         print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
-        if not print_duration:  # No-extrusion
+        if 'filament_total' in self.file_metadata and not self.file_metadata['filament_total']:  # No-extrusion
             print_duration = total_duration
         fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
         progress = float(self._printer.get_stat("virtual_sdcard", "progress"))
         self.labels["duration"].set_label(self.format_time(total_duration))
         elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
         self.buttons['elapsed'].set_label(elapsed_label)
-        non_printing = total_duration - print_duration
-        estimated = None
+        estimated = 0
         slicer_time = filament_time = file_time = None
         timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
 
@@ -648,15 +637,15 @@ class Panel(ScreenPanel):
             if self.file_metadata['estimated_time'] > 0:
                 # speed_factor compensation based on empirical testing
                 spdcomp = sqrt(self.speed_factor)
-                slicer_time = ((self.file_metadata['estimated_time']) / spdcomp) + non_printing
+                slicer_time = ((self.file_metadata['estimated_time']) / spdcomp)
         self.labels["slicer_time"].set_label(self.format_time(slicer_time))
 
         with suppress(Exception):
             if self.file_metadata['filament_total'] > fila_used:
-                filament_time = (print_duration / (fila_used / self.file_metadata['filament_total'])) + non_printing
+                filament_time = (print_duration / (fila_used / self.file_metadata['filament_total']))
         self.labels["filament_time"].set_label(self.format_time(filament_time))
         with suppress(ZeroDivisionError):
-            file_time = (print_duration / progress) + non_printing
+            file_time = (print_duration / progress)
         self.labels["file_time"].set_label(self.format_time(file_time))
 
         if timeleft_type == "file":
@@ -672,19 +661,29 @@ class Panel(ScreenPanel):
             else:
                 # At the begining file and filament are innacurate
                 estimated = slicer_time
-        if (estimated is None or estimated < 1) and file_time is not None:
-            if filament_time is not None and filament_time > 1:
+
+        if estimated < 1:
+            if file_time is None:
+                return
+            elif filament_time is not None and filament_time > 1:
                 estimated = (filament_time + file_time) / 2
             estimated = file_time
+        if estimated < 1:
+            return
+        progress = min(max(print_duration / estimated, 0), 1)
+        if progress >= 1:
+            estimated = file_time
+            progress = min(max(print_duration / estimated, 0), 1)
+
         self.labels["est_time"].set_label(self.format_time(estimated))
-        self.labels["time_left"].set_label(self.format_eta(estimated, total_duration))
+        self.labels["time_left"].set_label(self.format_eta(estimated, print_duration))
         remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
         self.buttons['left'].set_label(remaining_label)
-        self.update_progress(min(max(total_duration / estimated, 0), 1))
+        self.update_progress(progress)
 
     def update_progress(self, progress: float):
         self.progress = progress
-        self.labels['progress_text'].set_label(f"{progress * 100:.0f}%")
+        self.labels['progress_text'].set_label(f"{trunc(progress * 100)}%")
         self.labels['darea'].queue_draw()
 
     def set_state(self, state, msg=""):
@@ -739,18 +738,11 @@ class Panel(ScreenPanel):
             offset = self._printer.get_stat("gcode_move", "homing_origin")
             self.zoffset = float(offset[2]) if offset else 0
             if self.zoffset != 0:
-                endstop = (
-                    (
-                        self._printer.config_section_exists("stepper_z")
-                        and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe")
-                    )
-                    or "delta" in self._printer.get_config_section("printer")['kinematics']
-                )
-                if endstop:
+                if "Z_OFFSET_APPLY_ENDSTOP" in self._printer.available_commands:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_endstop"], 0, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(), 0, 0, 1, 1)
-                if self._printer.get_probe():
+                if "Z_OFFSET_APPLY_PROBE" in self._printer.available_commands:
                     self.buttons['button_grid'].attach(self.buttons["save_offset_probe"], 1, 0, 1, 1)
                 else:
                     self.buttons['button_grid'].attach(Gtk.Label(), 1, 0, 1, 1)
@@ -773,14 +765,33 @@ class Panel(ScreenPanel):
             width = self._screen.width * 0.9
             height = self._screen.height / 4
         else:
-            width = self._screen.width / 3
+            width = self._screen.width * .25
             height = self._gtk.content_height * 0.47
         pixbuf = self.get_file_image(self.filename, width, height)
         logging.debug(self.filename)
         if pixbuf is None:
             logging.debug("no pixbuf")
-            pixbuf = self._gtk.PixbufFromIcon("file", width / 2, height / 2)
-        self.labels['thumbnail'].set_from_pixbuf(pixbuf)
+            return
+        image = find_widget(self.labels['thumbnail'], Gtk.Image)
+        if image:
+            image.set_from_pixbuf(pixbuf)
+
+    def show_fullscreen_thumbnail(self, widget):
+        buttons = [
+            {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
+        ]
+        height = self._screen.height * .9 - self._gtk.font_size * 7.5
+        pixbuf = self.get_file_image(self.filename, self._screen.width * .9, height)
+        if pixbuf is None:
+            return
+        image = Gtk.Image.new_from_pixbuf(pixbuf)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.add(image)
+        box.set_vexpand(True)
+        self._gtk.Dialog(self.filename, buttons, box, self.close_fullscreen_thumbnail)
+
+    def close_fullscreen_thumbnail(self, dialog, response_id):
+        self._gtk.remove_dialog(dialog)
 
     def update_filename(self, filename):
         if not filename:

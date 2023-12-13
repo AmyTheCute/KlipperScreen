@@ -36,7 +36,7 @@ class Panel(ScreenPanel):
         self.labels['actions'].set_vexpand(False)
         self.labels['actions'].set_halign(Gtk.Align.CENTER)
         self.labels['actions'].set_homogeneous(True)
-        self.labels['actions'].set_size_request(self._gtk.content_width, -1)
+        self.labels['actions'].set_size_request(self._gtk.content_width - 30, -1)
 
         scroll = self._gtk.ScrolledWindow()
         scroll.set_hexpand(True)
@@ -91,9 +91,6 @@ class Panel(ScreenPanel):
 
     def activate(self):
         self.check_power_status()
-        self._screen.base_panel.show_macro_shortcut(False)
-        self._screen.base_panel.show_heaters(False)
-        self._screen.base_panel.show_estop(False)
 
     def check_power_status(self):
         if 'power' in self.labels:
@@ -119,7 +116,7 @@ class Panel(ScreenPanel):
                                               "machine.shutdown")
         else:
             logging.info("OS Shutdown")
-            os.system("systemctl poweroff")
+            os.system("systemctl poweroff -i")
 
     def restart_system(self, widget):
 
@@ -129,7 +126,7 @@ class Panel(ScreenPanel):
                                               "machine.reboot")
         else:
             logging.info("OS Reboot")
-            os.system("systemctl reboot")
+            os.system("systemctl reboot -i")
 
     def retry(self, widget):
         self.update_text((_("Connecting to %s") % self._screen.connecting_to_printer))
