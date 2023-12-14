@@ -170,7 +170,7 @@ class KlipperScreen(Gtk.Window):
         else:
             self.get_window().set_cursor(
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
-            os.system("xsetroot  -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
+            os.system("xsetroot -noreset -cursor ks_includes/emptyCursor.xbm ks_includes/emptyCursor.xbm")
         self.base_panel.activate()
         if self._config.errors:
             self.show_error_modal("Invalid config file", self._config.get_errors())
